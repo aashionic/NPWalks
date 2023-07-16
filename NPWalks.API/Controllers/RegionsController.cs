@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NPWalks.API.Data;
 using NPWalks.API.Models.Domain;
 using NPWalks.API.Models.DTO;
@@ -20,10 +21,10 @@ public class RegionsController : ControllerBase
     //GET ALL REGIONS
     //GET://https://localhost:portno/api/regions
     [HttpGet] //200 response
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
         //Get Data from Database - Domain Model
-        var regionsDomain = dbContext.Regions.ToList();
+        var regionsDomain = await dbContext.Regions.ToListAsync();
 
         //Map Domain Models to DTOs
         var regionsDto = new List<RegionDto>();
@@ -48,11 +49,11 @@ public class RegionsController : ControllerBase
     //GET://https://localhost:portno/api/regions/{id}
     [HttpGet]
     [Route("{id:guid}")]
-    public IActionResult GetById([FromRoute] Guid id)
+    public async Task<IActionResult> GetById([FromRoute] Guid id)
     {
         // var region = dbContext.Regions.Find(id);
         //Get Region Domain Model From Database
-        var regionDomain = dbContext.Regions.FirstOrDefault(x => x.Id == id);
+        var regionDomain = await dbContext.Regions.FirstOrDefaultAsync(x => x.Id == id);
         if (regionDomain == null)
         {
             return NotFound();
@@ -73,7 +74,7 @@ public class RegionsController : ControllerBase
     //POST To Create New Region
     //POST: https://localhost:port/api/regions
     [HttpPost] //201 response
-    public IActionResult Create([FromBody] AddRegionRequestDto addRegionRequestDto)
+    public async Task<IActionResult> Create([FromBody] AddRegionRequestDto addRegionRequestDto)
     {
         //Map Dto to Domain Model
         var regionDomainModel = new Region
@@ -84,8 +85,8 @@ public class RegionsController : ControllerBase
         };
 
         //Use Domain Model to create Region
-        dbContext.Regions.Add(regionDomainModel);
-        dbContext.SaveChanges();
+        await dbContext.Regions.AddAsync(regionDomainModel);
+        await dbContext.SaveChangesAsync();
 
         //Map Domain Model back to DTO
         var regionDto = new RegionDto
@@ -110,12 +111,12 @@ public class RegionsController : ControllerBase
     //PUT: https://localhost:port/api/regions/{id}
     [HttpPut]
     [Route("{id:Guid}")]
-    public IActionResult Update(
+    public async Task<IActionResult> Update(
         [FromRoute] Guid id,
         [FromBody] UpdateRegionRequestDTO updateRegionRequestDTO
     )
     {
-        var regionDomainModel = dbContext.Regions.FirstOrDefault(x => x.Id == id);
+        var regionDomainModel = await dbContext.Regions.FirstOrDefaultAsync(x => x.Id == id);
         if (regionDomainModel == null)
         {
             return NotFound();
@@ -123,7 +124,7 @@ public class RegionsController : ControllerBase
         regionDomainModel.Code = updateRegionRequestDTO.Code;
         regionDomainModel.Name = updateRegionRequestDTO.Name;
         regionDomainModel.RegionImageUrl = updateRegionRequestDTO.RegionImageUrl;
-        dbContext.SaveChanges();
+        await dbContext.SaveChangesAsync();
 
         var regionDto = new RegionDto
         {
@@ -139,16 +140,16 @@ public class RegionsController : ControllerBase
     //DELETE: https://localhost:port/api/regions/{id}
     [HttpDelete]
     [Route("{id:Guid}")]
-    public IActionResult Delete([FromRoute] Guid id)
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
-        var regionDomainModel = dbContext.Regions.FirstOrDefault(x => x.Id == id);
+        var regionDomainModel = await dbContext.Regions.FirstOrDefaultAsync(x => x.Id == id);
         if (regionDomainModel == null)
         {
             return NotFound();
         }
         //Delete region
-        dbContext.Regions.Remove(regionDomainModel);
-        dbContext.SaveChanges();
+        dbContext.Regions.Remove(regionDomainModel); //remove is still synchronous
+        await dbContext.SaveChangesAsync();
         //optional: return deleted region back
         var regionDto = new RegionDto
         {

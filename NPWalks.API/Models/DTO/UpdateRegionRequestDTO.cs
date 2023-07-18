@@ -1,6 +1,6 @@
 ﻿namespace NPWalks.API.Models.DTO
 {
-    public class UpdateRegionRequestDTO
+    public class UpdateRegionRequestDto
     {
         public required string Code { get; set; }
         public required string Name { get; set; }

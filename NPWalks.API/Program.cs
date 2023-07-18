@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NPWalks.API.Data;
+using NPWalks.API.Mappings;
 using NPWalks.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,9 @@ builder.Services.AddDbContext<NPWalksDbContext>(
         options.UseSqlServer(builder.Configuration.GetConnectionString("NPWalksConnectionString"))
 );
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

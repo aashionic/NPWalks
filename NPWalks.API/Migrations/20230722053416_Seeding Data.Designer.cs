@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NPWalks.API.Data;
 
@@ -11,9 +12,11 @@ using NPWalks.API.Data;
 namespace NPWalks.API.Migrations
 {
     [DbContext(typeof(NPWalksDbContext))]
-    partial class NPWalksDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230722053416_Seeding Data")]
+    partial class SeedingData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

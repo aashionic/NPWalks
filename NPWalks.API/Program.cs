@@ -18,6 +18,7 @@ builder.Services.AddDbContext<NPWalksDbContext>(
         options.UseSqlServer(builder.Configuration.GetConnectionString("NPWalksConnectionString"))
 );
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+builder.Services.AddScoped<IWalkRepository, WalkRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 

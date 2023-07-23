@@ -13,6 +13,7 @@ namespace NPWalks.API.Mappings
             CreateMap<UpdateRegionRequestDto, Region>().ReverseMap();
             CreateMap<AddWalkRequestDto, Walk>().ReverseMap();
             CreateMap<Walk, WalkDto>().ReverseMap(); //Walk = walkDomainModel
+            CreateMap<Difficulty, DifficultyDto>().ReverseMap();
         }
     }
 }

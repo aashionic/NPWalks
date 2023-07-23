@@ -11,7 +11,8 @@ public class Walk
     public Guid DifficultyId { get; set; }
 
     public Guid RegionId { get; set; }
+
     //Navigation Properties
-    public Difficulty Diffculty { get; set; }
-    public Region Region{ get; set; }
+    public Difficulty Difficulty { get; set; }
+    public Region Region { get; set; }
 }

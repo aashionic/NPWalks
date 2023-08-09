@@ -1,14 +1,13 @@
 ﻿using NPWalks.API.Models.Domain;
 
-namespace NPWalks.API.Repositories
-{
-    public interface IWalkRepository
-    {
-        Task<Walk> CreateAsync(Walk walk);
-        Task<List<Walk>> GetAllAsync();
-        Task<Walk?> GetByIdAsync(Guid id);
-        Task<Walk?> UpdateAsync(Guid id, Walk walk);
+namespace NPWalks.API.Repositories;
 
-        Task<Walk?> DeleteAsync(Guid id);
-    }
+public interface IWalkRepository
+{
+    Task<Walk> CreateAsync(Walk walk);
+    Task<List<Walk>> GetAllAsync(string? filterOn = null, string? filterQuery = null);
+    Task<Walk?> GetByIdAsync(Guid id);
+    Task<Walk?> UpdateAsync(Guid id, Walk walk);
+
+    Task<Walk?> DeleteAsync(Guid id);
 }

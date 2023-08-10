@@ -37,7 +37,9 @@ namespace NPWalks.API.Repositories
             string? filterOn = null,
             string? filterQuery = null,
             string? sortBy = null,
-            bool isAscending = true
+            bool isAscending = true,
+            int pageNumber = 1,
+            int pageSize = 1000
         )
         {
             var walks = dbContext.Walks.Include("Difficulty").Include("Region").AsQueryable();
@@ -69,7 +71,11 @@ namespace NPWalks.API.Repositories
                         : walks.OrderByDescending(x => x.LengthInKm);
                 }
             }
-            return await walks.ToListAsync();
+
+            //Pagination
+            var skipResults = (pageNumber - 1) * pageSize; //(2-1)*10 i.e. Skip 10 results and Take next 10 Results
+
+            return await walks.Skip(skipResults).Take(pageSize).ToListAsync();
 
             // return await dbContext.Walks.Include("Difficulty").Include("Region").ToListAsync();
         }

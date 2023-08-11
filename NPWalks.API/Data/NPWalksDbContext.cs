@@ -6,7 +6,7 @@ namespace NPWalks.API.Data;
 public class NPWalksDbContext : DbContext
 {
     //constructor
-    public NPWalksDbContext(DbContextOptions dbContextOptions)
+    public NPWalksDbContext(DbContextOptions<NPWalksDbContext> dbContextOptions)
         : base(dbContextOptions) //pass dbContextOptions to the base class
     { }
 

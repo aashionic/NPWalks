@@ -20,6 +20,12 @@ builder.Services.AddDbContext<NPWalksDbContext>(
     options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("NPWalksConnectionString"))
 );
+builder.Services.AddDbContext<NPWalksAuthDbContext>(
+    options =>
+        options.UseSqlServer(
+            builder.Configuration.GetConnectionString("NPWalksAuthConnectionString")
+        )
+);
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 builder.Services.AddScoped<IWalkRepository, WalkRepository>();
 

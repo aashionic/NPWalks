@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#region
+
+using System.ComponentModel.DataAnnotations;
+
+#endregion
 
 namespace NPWalks.API.Models.DTO
 {
@@ -12,6 +16,7 @@ namespace NPWalks.API.Models.DTO
         [Required]
         [MaxLength(100, ErrorMessage = "Code has to be a maximum of 100 characters")]
         public required string Name { get; set; }
+
         public string? RegionImageUrl { get; set; }
     }
 }

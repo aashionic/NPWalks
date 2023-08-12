@@ -1,6 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#region
+
+using Microsoft.EntityFrameworkCore;
 using NPWalks.API.Data;
 using NPWalks.API.Models.Domain;
+
+#endregion
 
 namespace NPWalks.API.Repositories
 {
@@ -27,6 +31,7 @@ namespace NPWalks.API.Repositories
             {
                 return null;
             }
+
             dbContext.Regions.Remove(existingRegion);
             await dbContext.SaveChangesAsync();
             return existingRegion;
@@ -49,6 +54,7 @@ namespace NPWalks.API.Repositories
             {
                 return null;
             }
+
             //updating the existing region
             existingRegion.Code = region.Code;
             existingRegion.Name = region.Name;

@@ -1,10 +1,14 @@
-﻿using AutoMapper;
+﻿#region
+
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using NPWalks.API.CustomActionFilters;
 using NPWalks.API.Data;
 using NPWalks.API.Models.Domain;
 using NPWalks.API.Models.DTO;
 using NPWalks.API.Repositories;
+
+#endregion
 
 namespace NPWalks.API.Controllers;
 
@@ -71,7 +75,8 @@ public class RegionsController : ControllerBase
     public async Task<IActionResult> Create([FromBody] AddRegionRequestDto addRegionRequestDto)
     {
         //Map Dto to Domain Model
-        var regionDomainModel = mapper.Map<Region>(addRegionRequestDto); //Destination=Region, Source=addRegionRequestDto
+        var regionDomainModel =
+            mapper.Map<Region>(addRegionRequestDto); //Destination=Region, Source=addRegionRequestDto
 
         //Use Domain Model to create Region
         regionDomainModel = await regionRepository.CreateAsync(regionDomainModel);
@@ -108,6 +113,7 @@ public class RegionsController : ControllerBase
         {
             return NotFound();
         }
+
         //Map Domain model to Dto
         var regionDto = mapper.Map<RegionDto>(regionDomainModel);
         return Ok(regionDto);

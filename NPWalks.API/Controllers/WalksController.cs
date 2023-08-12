@@ -1,9 +1,13 @@
-﻿using AutoMapper;
+﻿#region
+
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using NPWalks.API.CustomActionFilters;
 using NPWalks.API.Models.Domain;
 using NPWalks.API.Models.DTO;
 using NPWalks.API.Repositories;
+
+#endregion
 
 namespace NPWalks.API.Controllers;
 
@@ -74,6 +78,7 @@ public class WalksController : ControllerBase
         {
             return NotFound();
         }
+
         //Map Domain Model to DTO
         return Ok(mapper.Map<WalkDto>(walkDomainModel));
     }
@@ -110,6 +115,7 @@ public class WalksController : ControllerBase
         {
             return NotFound();
         }
+
         //Map Domain Model to DTO
         return Ok(mapper.Map<WalkDto>(deleteWalkDomainModel));
     }

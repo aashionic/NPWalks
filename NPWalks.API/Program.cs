@@ -1,4 +1,5 @@
-using System.Text;
+#region
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,9 @@ using Microsoft.IdentityModel.Tokens;
 using NPWalks.API.Data;
 using NPWalks.API.Mappings;
 using NPWalks.API.Repositories;
+using System.Text;
+
+#endregion
 
 var builder = WebApplication.CreateBuilder(args);
 

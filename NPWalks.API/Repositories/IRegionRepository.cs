@@ -1,4 +1,8 @@
-﻿using NPWalks.API.Models.Domain;
+﻿#region
+
+using NPWalks.API.Models.Domain;
+
+#endregion
 
 namespace NPWalks.API.Repositories
 {
@@ -12,5 +16,5 @@ namespace NPWalks.API.Repositories
 
         Task<Region?> UpdateAsync(Guid id, Region region);
         Task<Region?> DeleteAsync(Guid id);
-    }
+    }         
 }

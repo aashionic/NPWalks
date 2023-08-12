@@ -1,6 +1,10 @@
-﻿using AutoMapper;
+﻿#region
+
+using AutoMapper;
 using NPWalks.API.Models.Domain;
 using NPWalks.API.Models.DTO;
+
+#endregion
 
 namespace NPWalks.API.Mappings
 {

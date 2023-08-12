@@ -1,6 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#region
+
+using Microsoft.EntityFrameworkCore;
 using NPWalks.API.Data;
 using NPWalks.API.Models.Domain;
+
+#endregion
 
 namespace NPWalks.API.Repositories
 {
@@ -28,6 +32,7 @@ namespace NPWalks.API.Repositories
             {
                 return null;
             }
+
             dbContext.Walks.Remove(existingWalk);
             await dbContext.SaveChangesAsync();
             return existingWalk;
@@ -54,6 +59,7 @@ namespace NPWalks.API.Repositories
                     walks = walks.Where(x => x.Name.Contains(filterQuery));
                 }
             }
+
             //Sorting
             if (string.IsNullOrWhiteSpace(sortBy) == false)
             {
@@ -95,6 +101,7 @@ namespace NPWalks.API.Repositories
             {
                 return null;
             }
+
             existingWalk.Name = walk.Name;
             existingWalk.Description = walk.Description;
             existingWalk.LengthInKm = walk.LengthInKm;

@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#region
+
+using System.ComponentModel.DataAnnotations;
+
+#endregion
 
 namespace NPWalks.API.Models.DTO;
 
@@ -6,11 +10,11 @@ public class RegisterRequestDto
 {
     [Required]
     [DataType(DataType.EmailAddress)]
-    public string Username { get; set; }
+    public required string Username { get; set; }
 
     [Required]
     [DataType(DataType.Password)]
-    public string Password { get; set; }
+    public required string Password { get; set; }
 
-    public string[] Roles { get; set; }
+    public required string[] Roles { get; set; }
 }

@@ -1,6 +1,7 @@
 ﻿#region
 
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NPWalks.API.CustomActionFilters;
 using NPWalks.API.Data;
@@ -35,6 +36,7 @@ public class RegionsController : ControllerBase
     //GET ALL REGIONS
     //GET://https://localhost:portno/api/regions
     [HttpGet] //200 response
+    [Authorize]
     public async Task<IActionResult> GetAll()
     {
         //Get Data from Database - Domain Model
@@ -75,8 +77,7 @@ public class RegionsController : ControllerBase
     public async Task<IActionResult> Create([FromBody] AddRegionRequestDto addRegionRequestDto)
     {
         //Map Dto to Domain Model
-        var regionDomainModel =
-            mapper.Map<Region>(addRegionRequestDto); //Destination=Region, Source=addRegionRequestDto
+        var regionDomainModel = mapper.Map<Region>(addRegionRequestDto); //Destination=Region, Source=addRegionRequestDto
 
         //Use Domain Model to create Region
         regionDomainModel = await regionRepository.CreateAsync(regionDomainModel);

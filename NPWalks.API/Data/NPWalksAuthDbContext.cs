@@ -11,30 +11,33 @@ namespace NPWalks.API.Data;
 public class NPWalksAuthDbContext : IdentityDbContext
 {
     public NPWalksAuthDbContext(DbContextOptions<NPWalksAuthDbContext> options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        const string readerRoleId = "8F7A64C3-1A99-4D32-97E5-404B1D3CFDD7";
-        const string writerRoleId = "634273FE-B4B5-472C-B26A-6A89D0BC9216";
+
+        var readerRoleId = "a71a55d6-99d7-4123-b4e0-1218ecb90e3e";
+        var writerRoleId = "c309fa92-2123-47be-b397-a1c77adb502c";
+
         var roles = new List<IdentityRole>
         {
             new IdentityRole
             {
                 Id = readerRoleId,
                 ConcurrencyStamp = readerRoleId,
+                Name = "Reader",
                 NormalizedName = "Reader".ToUpper()
             },
             new IdentityRole
             {
                 Id = writerRoleId,
                 ConcurrencyStamp = writerRoleId,
+                Name = "Writer",
                 NormalizedName = "Writer".ToUpper()
             }
         };
+
         builder.Entity<IdentityRole>().HasData(roles);
     }
 }

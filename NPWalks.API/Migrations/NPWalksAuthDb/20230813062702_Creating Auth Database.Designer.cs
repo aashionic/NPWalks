@@ -9,10 +9,10 @@ using NPWalks.API.Data;
 
 #nullable disable
 
-namespace NPWalks.API.Migrations
+namespace NPWalks.API.Migrations.NPWalksAuthDb
 {
     [DbContext(typeof(NPWalksAuthDbContext))]
-    [Migration("20230811053246_Creating Auth Database")]
+    [Migration("20230813062702_Creating Auth Database")]
     partial class CreatingAuthDatabase
     {
         /// <inheritdoc />
@@ -54,14 +54,16 @@ namespace NPWalks.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8F7A64C3-1A99-4D32-97E5-404B1D3CFDD7",
-                            ConcurrencyStamp = "8F7A64C3-1A99-4D32-97E5-404B1D3CFDD7",
+                            Id = "a71a55d6-99d7-4123-b4e0-1218ecb90e3e",
+                            ConcurrencyStamp = "a71a55d6-99d7-4123-b4e0-1218ecb90e3e",
+                            Name = "Reader",
                             NormalizedName = "READER"
                         },
                         new
                         {
-                            Id = "634273FE-B4B5-472C-B26A-6A89D0BC9216",
-                            ConcurrencyStamp = "634273FE-B4B5-472C-B26A-6A89D0BC9216",
+                            Id = "c309fa92-2123-47be-b397-a1c77adb502c",
+                            ConcurrencyStamp = "c309fa92-2123-47be-b397-a1c77adb502c",
+                            Name = "Writer",
                             NormalizedName = "WRITER"
                         });
                 });

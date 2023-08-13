@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NPWalks.API.Models.DTO;
 
-public class RegisterRequestDto
+public class LoginRequestDto
 {
     [Required]
     [DataType(DataType.EmailAddress)]
@@ -15,6 +15,4 @@ public class RegisterRequestDto
     [Required]
     [DataType(DataType.Password)]
     public string Password { get; set; }
-
-    public string[] Roles { get; set; }
 }

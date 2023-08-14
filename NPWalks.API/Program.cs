@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using NPWalks.API.Data;
 using NPWalks.API.Mappings;
 using NPWalks.API.Repositories;
+using Serilog;
 using System.Text;
 
 #endregion
@@ -16,6 +17,10 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+var logger = new LoggerConfiguration().WriteTo.Console().MinimumLevel.Warning().CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
@@ -119,14 +124,17 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"Images")),
-    RequestPath="/Images"
+app.UseStaticFiles(
+    new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(
+            Path.Combine(Directory.GetCurrentDirectory(), "Images")
+        ),
+        RequestPath = "/Images"
 
-    //https://localhost:1234/Images
-
-});
+        //https://localhost:1234/Images
+    }
+);
 
 app.MapControllers();
 

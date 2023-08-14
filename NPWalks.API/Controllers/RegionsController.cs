@@ -8,6 +8,7 @@ using NPWalks.API.Data;
 using NPWalks.API.Models.Domain;
 using NPWalks.API.Models.DTO;
 using NPWalks.API.Repositories;
+using System.Text.Json;
 
 #endregion
 
@@ -21,32 +22,48 @@ public class RegionsController : ControllerBase
     private readonly NPWalksDbContext dbContext;
     private readonly IRegionRepository regionRepository;
     private readonly IMapper mapper;
+    private readonly ILogger<RegionsController> logger;
 
     public RegionsController(
         NPWalksDbContext dbContext,
         IRegionRepository regionRepository,
-        IMapper mapper
+        IMapper mapper,
+        ILogger<RegionsController> logger
     )
     {
         this.dbContext = dbContext;
         this.regionRepository = regionRepository;
         this.mapper = mapper;
+        this.logger = logger;
     }
 
     //GET ALL REGIONS
     //GET://https://localhost:portno/api/regions
     [HttpGet] //200 response
-    [Authorize(Roles = "Reader,Writer")]
+    //[Authorize(Roles = "Reader,Writer")]
     public async Task<IActionResult> GetAll()
     {
-        //Get Data from Database - Domain Model
-        var regionsDomain = await regionRepository.GetAllAsync();
+        try
+        {
+            throw new Exception("This is a custom exception");
+            //Get Data from Database - Domain Model
+            var regionsDomain = await regionRepository.GetAllAsync();
 
-        //Map Domain Models to DTOs-Automapper
-        var regionsDto = mapper.Map<List<RegionDto>>(regionsDomain);
+            logger.LogInformation(
+                $"Finished GetAllRegions request with data: {JsonSerializer.Serialize(regionsDomain)}"
+            );
 
-        //Return DTOs
-        return Ok(regionsDto);
+            //Map Domain Models to DTOs-Automapper
+            var regionsDto = mapper.Map<List<RegionDto>>(regionsDomain);
+
+            //Return DTOs
+            return Ok(regionsDto);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, ex.Message);
+            throw;
+        }
     }
 
     //GET REGION BY ID

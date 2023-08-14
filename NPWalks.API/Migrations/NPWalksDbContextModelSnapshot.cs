@@ -17,7 +17,7 @@ namespace NPWalks.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.9")
+                .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -52,6 +52,35 @@ namespace NPWalks.API.Migrations
                             Id = new Guid("71a84ba7-1f6c-468e-b334-862fb89ca31e"),
                             Name = "Hard"
                         });
+                });
+
+            modelBuilder.Entity("NPWalks.API.Models.Domain.Image", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FileDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileExtension")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("FileSizeInBytes")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("NPWalks.API.Models.Domain.Region", b =>
@@ -143,7 +172,7 @@ namespace NPWalks.API.Migrations
 
             modelBuilder.Entity("NPWalks.API.Models.Domain.Walk", b =>
                 {
-                    b.HasOne("NPWalks.API.Models.Domain.Difficulty", "Diffculty")
+                    b.HasOne("NPWalks.API.Models.Domain.Difficulty", "Difficulty")
                         .WithMany()
                         .HasForeignKey("DifficultyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -155,7 +184,7 @@ namespace NPWalks.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Diffculty");
+                    b.Navigation("Difficulty");
 
                     b.Navigation("Region");
                 });

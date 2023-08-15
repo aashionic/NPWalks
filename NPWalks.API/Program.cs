@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NPWalks.API.Data;
 using NPWalks.API.Mappings;
+using NPWalks.API.Middlewares;
 using NPWalks.API.Repositories;
 using Serilog;
 using System.Text;
@@ -20,7 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var logger = new LoggerConfiguration().WriteTo
     .Console()
-    .WriteTo.File("Logs/NPWalks_log.txt", rollingInterval: RollingInterval.Minute)
+    .WriteTo.File("Logs/NPWalks_log.txt", rollingInterval: RollingInterval.Day)
     .MinimumLevel.Warning()
     .CreateLogger();
 builder.Logging.ClearProviders();
@@ -123,6 +124,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

@@ -12,9 +12,7 @@ using NPWalks.API.Middlewares;
 using NPWalks.API.Repositories;
 using Serilog;
 using System.Text;
-
 #endregion
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

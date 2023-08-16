@@ -44,7 +44,6 @@ public class RegionsController : ControllerBase
     {
         try
         {
-            throw new Exception("This is a custom exception");
             //Get Data from Database - Domain Model
             var regionsDomain = await regionRepository.GetAllAsync();
 
